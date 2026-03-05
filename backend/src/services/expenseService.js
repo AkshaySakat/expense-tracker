@@ -11,3 +11,12 @@ exports.getAllExpenses = async () => {
 exports.getExpenseById = async (id) => {
   return await expenseRepository.getExpenseById(id);
 };
+
+
+exports.updateExpense = async (id, data) => {
+  return await expenseRepository.updateExpense(id, data);
+};
+
+exports.deleteExpense = async (id) => {
+  return await expenseRepository.deleteExpense(id);
+};

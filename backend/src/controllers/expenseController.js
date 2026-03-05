@@ -31,3 +31,28 @@ exports.getExpenseById = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+exports.updateExpense = async (req, res) => {
+  const { id } = req.params;
+  const data = req.body;
+
+  const updatedExpense = await expenseService.updateExpense(id, data);
+
+  if (!updatedExpense) {
+    return res.status(404).json({ message: "Expense not found" });
+  }
+
+  res.json(updatedExpense);
+};
+
+exports.deleteExpense = async (req, res) => {
+  const { id } = req.params;
+
+  const deleted = await expenseService.deleteExpense(id);
+
+  if (!deleted) {
+    return res.status(404).json({ message: "Expense not found" });
+  }
+
+  res.json({ message: "Expense deleted successfully" });
+};
