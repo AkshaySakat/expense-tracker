@@ -2,6 +2,7 @@ const expenseService = require('../services/expenseService');
 
 exports.createExpense = async (req, res) => {
   try {
+    console.log(" Create Expense ")
     const expense = await expenseService.createExpense(req.body);
     res.status(201).json(expense);
   } catch (error) {
@@ -11,6 +12,7 @@ exports.createExpense = async (req, res) => {
 
 exports.getAllExpenses = async (req, res) => {
   try {
+    console.log(" Get All Expenses ")
     const expenses = await expenseService.getAllExpenses();
     res.json(expenses);
   } catch (error) {
@@ -20,6 +22,7 @@ exports.getAllExpenses = async (req, res) => {
 
 exports.getExpenseById = async (req, res) => {
   try {
+    console.log(" Get Expense By Id")
     const expense = await expenseService.getExpenseById(req.params.id);
 
     if (!expense) {
@@ -33,6 +36,7 @@ exports.getExpenseById = async (req, res) => {
 };
 
 exports.updateExpense = async (req, res) => {
+  console.log(" Update Expense By Id")
   const { id } = req.params;
   const data = req.body;
 
@@ -46,6 +50,7 @@ exports.updateExpense = async (req, res) => {
 };
 
 exports.deleteExpense = async (req, res) => {
+  console.log(" Delete Expense By Id")
   const { id } = req.params;
 
   const deleted = await expenseService.deleteExpense(id);
