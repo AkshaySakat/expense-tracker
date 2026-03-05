@@ -13,3 +13,25 @@ exports.createExpense = async ({ title, amount, category, date, notes }) => {
 
   return result.rows[0];
 };
+
+exports.getAllExpenses = async () => {
+  const query = `
+    SELECT * FROM expenses
+    ORDER BY date DESC
+  `;
+
+  const result = await pool.query(query);
+
+  return result.rows;
+};
+
+exports.getExpenseById = async (id) => {
+  const query = `
+    SELECT * FROM expenses
+    WHERE id = $1
+  `;
+
+  const result = await pool.query(query, [id]);
+
+  return result.rows[0];
+};
