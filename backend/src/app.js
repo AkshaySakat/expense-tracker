@@ -2,16 +2,30 @@ const express = require('express');
 const cors = require('cors');
 const expenseRoutes = require('./routes/expenseRoutes');
 const errorMiddleware = require("./middleware/errorMiddleware");
+const path = require('path');
 
 const app = express();
+
 app.use(cors());
 app.use(express.json());
-app.use(errorMiddleware);
 
+/* API Routes */
 app.use('/api', expenseRoutes);
 
-app.get('/health', (req, res)=>{
-    res.json({status: 'ok'});
+/* Health Check */
+app.get('/health', (req, res) => {
+  res.json({ status: 'ok' });
 });
+
+if (process.env.NODE_ENV === "production") {
+/* Serve React Build */
+app.use(express.static(path.join(__dirname, '../../frontend/build')));
+
+app.get((req, res) => {
+  res.sendFile(path.join(__dirname, '../../frontend/build/index.html'));
+});
+}
+/* Error Middleware (ALWAYS LAST) */
+app.use(errorMiddleware);
 
 module.exports = app;
