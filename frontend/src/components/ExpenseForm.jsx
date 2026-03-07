@@ -7,6 +7,7 @@ function ExpenseForm({ refreshExpenses }) {
     title: "",
     amount: "",
     category: "",
+    notes:"",
     date: ""
   });
 
@@ -26,6 +27,7 @@ function ExpenseForm({ refreshExpenses }) {
       title: "",
       amount: "",
       category: "",
+      notes: "",
       date: ""
     });
 
@@ -54,6 +56,13 @@ function ExpenseForm({ refreshExpenses }) {
         name="category"
         placeholder="Category"
         value={form.category}
+        onChange={handleChange}
+      />
+
+      <input
+        name="notes"
+        placeholder="Notes"
+        value={form.notes}
         onChange={handleChange}
       />
 

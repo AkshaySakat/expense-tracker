@@ -18,6 +18,7 @@ function ExpenseList({ expenses, refreshExpenses }) {
             <th>Title</th>
             <th>Amount</th>
             <th>Category</th>
+            <th>Notes</th>
             <th>Date</th>
             <th>Delete</th>
           </tr>
@@ -29,6 +30,7 @@ function ExpenseList({ expenses, refreshExpenses }) {
               <td>{expense.title}</td>
               <td>{expense.amount}</td>
               <td>{expense.category}</td>
+              <td>{expense.notes}</td>
               <td>{expense.date}</td>
 
               <td>
