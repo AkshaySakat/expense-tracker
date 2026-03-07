@@ -1,0 +1,129 @@
+1. React, Express, NodeJs, PM2, PostgreSQL - stack
+
+During deployment: 
+once app is github.
+Turn on ec2 instance and install nodejs, npm, git and pg with 
+
+
+
+1️⃣ Launch EC2 Instance
+
+Go to Amazon EC2 → Launch Instance
+
+Select:
+Name: my-app-server
+AMI: Ubuntu Server 22.04
+Instance type: t2.micro (free tier)
+Key pair: create new key pair (download .pem file)
+Network settings → Security Group
+Add inbound rules:
+
+Type	Port	Source
+SSH	22	My IP
+HTTP	80	Anywhere
+HTTPS	443	Anywhere
+Custom TCP	5000	Anywhere
+
+Launch instance.
+
+2️⃣ Connect to EC2
+
+Copy Public IP
+
+Example:
+
+3.110.xxx.xxx
+
+Connect using terminal:
+
+ssh -i mykey.pem ubuntu@YOUR_PUBLIC_IP
+
+Example
+
+ssh -i mykey.pem ubuntu@3.110.xxx.xxx
+
+3️⃣ Install Node.js
+Inside EC2 run:
+sudo apt update
+sudo apt install nodejs npm -y
+
+Check:
+node -v
+npm -v
+
+4️⃣ Install PostgreSQL
+sudo apt install postgresql postgresql-contrib -y
+
+Start PostgreSQL : sudo systemctl start postgresql
+
+Login : sudo -u postgres psql
+
+Create DB
+
+CREATE DATABASE myapp;
+CREATE USER myuser WITH PASSWORD 'mypassword';
+GRANT ALL PRIVILEGES ON DATABASE myapp TO myuser;
+
+CREATE TABLE expenses (
+  id SERIAL PRIMARY KEY,
+  title VARCHAR(255),
+  amount NUMERIC,
+  category VARCHAR(100),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+Exit: \q
+
+
+5️⃣ Upload Your Project
+Clone from GitHub: 
+git clone https://github.com/yourrepo/project.git
+
+
+cd project
+6️⃣ Install Backend Dependencies
+cd backend
+npm install
+
+Add .env
+PORT=5000
+DB_HOST=localhost
+DB_USER=myuser
+DB_PASSWORD=mypassword
+DB_NAME=myapp
+
+node server.js
+
+7️⃣ Build React Frontend
+
+cd frontend
+npm install
+npm run build
+
+this creates : frontend/dist
+restart server
+
+
+9️⃣ Keep Node Running (PM2)
+Install **PM2:    sudo npm install -g pm2
+Run app:  pm2 start server.js
+
+setup PM2: 
+1️⃣ SSH into EC2
+ssh -i your-key.pem ubuntu@YOUR_ELASTIC_IP
+
+2️⃣ Check if PM2 startup is installed
+
+Run: pm2 startup
+It will show something like:
+sudo env PATH=$PATH:/usr/bin pm2 startup systemd -u ubuntu --hp /home/ubuntu  // ⚠️ Important: You must run that exact command.
+// This installs the system service that runs PM2 when the server boots.
+
+3️⃣ Now go to your project folder
+cd my-project/backend
+
+Start your app: pm2 start src/service.js
+
+
+4️⃣ Save the running process
+pm2 save
