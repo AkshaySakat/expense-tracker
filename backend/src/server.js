@@ -4,6 +4,7 @@ const loadEnv = require("./config/loadEnv");
 async function startServer() {
     console.log("Welcome to Server.js ");
     await loadEnv();
+    console.log('------------HOST-----', process.env.DB);
     console.log('------------loadENV-----', process.env);
     const app = require('./app');
     app.listen(process.env.PORT, () => {

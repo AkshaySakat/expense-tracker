@@ -19,7 +19,6 @@ async function loadEnv() {
     Recursive: true,
     WithDecryption: true
   });
-console.log("_____________command_________", command);
   const response = await client.send(command);
 
   console.log('Load Config response :: ', response);
@@ -27,7 +26,7 @@ console.log("_____________command_________", command);
   response.Parameters.forEach(param => {
     const key = param.Name.split("/").pop();
     console.log("_____________key_________", key);
-    console.log("_____________key_________", param.Value);
+    console.log("_____________value_________", param.Value);
     process.env[key] = param.Value;
   });
 

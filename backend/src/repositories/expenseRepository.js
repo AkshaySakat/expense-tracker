@@ -21,7 +21,7 @@ exports.getAllExpenses = async () => {
     SELECT * FROM expenses
     ORDER BY date DESC
   `;
-
+console.log('-----query-----', query)
   const result = await pool.query(query);
 
   return result.rows;
