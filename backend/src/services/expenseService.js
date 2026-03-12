@@ -5,6 +5,7 @@ exports.createExpense = async (data) => {
 };
 
 exports.getAllExpenses = async () => {
+   console.log(" Get All Expenses service called...")
   return await expenseRepository.getAllExpenses();
 };
 

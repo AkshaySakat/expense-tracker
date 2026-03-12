@@ -1,6 +1,7 @@
 const { SSMClient, GetParametersByPathCommand } = require("@aws-sdk/client-ssm");
 require('dotenv').config();
 const client = new SSMClient({ region: "ap-south-1" });
+console.log("Welcome to loadEnv.js ");
 
 async function loadEnv() {
   const env = process.env.APP_ENV || "qa";

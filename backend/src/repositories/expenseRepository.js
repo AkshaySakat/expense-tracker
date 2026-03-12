@@ -15,6 +15,8 @@ exports.createExpense = async ({ title, amount, category, date, notes }) => {
 };
 
 exports.getAllExpenses = async () => {
+  console.log(" Get All Expenses repo called...")
+
   const query = `
     SELECT * FROM expenses
     ORDER BY date DESC

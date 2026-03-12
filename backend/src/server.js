@@ -2,6 +2,7 @@
 const loadEnv = require("./config/loadEnv");
 
 async function startServer() {
+    console.log("Welcome to Server.js ");
     await loadEnv();
     console.log('------------loadENV-----', process.env);
     const app = require('./app');

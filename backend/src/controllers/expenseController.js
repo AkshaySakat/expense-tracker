@@ -12,7 +12,7 @@ exports.createExpense = async (req, res, next) => {
 
 exports.getAllExpenses = async (req, res, next) => {
   try {
-    console.log(" Get All Expenses ")
+    console.log(" Get All Expenses controller called...")
     const expenses = await expenseService.getAllExpenses();
     res.json(expenses);
   } catch (error) {

@@ -9,6 +9,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+ console.log("Welcome to app.js ");
+
 /* API Routes */
 app.use('/api', expenseRoutes);
 
