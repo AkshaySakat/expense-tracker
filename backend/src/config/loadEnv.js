@@ -19,7 +19,7 @@ async function loadEnv() {
 
   const response = await client.send(command);
 
-  console.log('Load Config response', response);
+  console.log('Load Config response :: ', response);
 
   response.Parameters.forEach(param => {
     const key = param.Name.split("/").pop();
