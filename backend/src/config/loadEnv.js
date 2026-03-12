@@ -6,7 +6,6 @@ const client = new SSMClient({ region: "ap-southeast-2" });
 async function loadEnv() {
   try {
     const env = process.env.APP_ENV || "qa";
-  console.log("_____________env_________", env);
   // Skip AWS when running locally
   if (env === "local") {
     console.log("Running locally. Using .env variables.");
@@ -25,8 +24,6 @@ async function loadEnv() {
 
   response.Parameters.forEach(param => {
     const key = param.Name.split("/").pop();
-    console.log("_____________key_________", key);
-    console.log("_____________value_________", param.Value);
     process.env[key] = param.Value;
   });
 
